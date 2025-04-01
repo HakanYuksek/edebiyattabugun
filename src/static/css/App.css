@@ -1,0 +1,59 @@
+.header-title {
+    background-color: #211F1F;
+    color: white;
+    font-size: xx-large;
+}
+
+.center-align {
+    text-align: center;
+}
+
+.centered-container {
+    display: flex;
+    justify-content: center; /* Yatayda ortalama */
+    align-items: center; /* Dikeyde ortalama */
+    margin: 0; /* Varsayılan margin'leri sıfırlayalım */
+    margin-bottom: 2%;
+  }
+
+.summary-card {
+    background-color: #211F1F;
+    color: white;
+    font-size: large;
+    text-align: center;
+    border: 2px;;
+    transition: transform .2s;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 400px
+}
+
+.summary-card:hover {
+    -ms-transform: scale(1.5);
+    /* IE 9 */
+    -webkit-transform: scale(1.5);
+    /* Safari 3-8 */
+    transform: scale(1.1);
+    color: red;
+}
+
+.card-col {
+    flex: 0 0 20%;
+}
+
+.card-col:nth-child(n+6) {
+    margin-top: 1rem;
+}
+
+.summary-card-text {
+    background-color: #211F1F;
+    color: white;
+    font-size: large;
+    text-align: left;
+    border: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: "100%";
+}

@@ -1,0 +1,741 @@
+import React, { Component } from 'react'
+import axios from "axios";
+import { Card,Col,CardText, CardGroup, CardFooter } from 'reactstrap'
+
+const Months = {
+    "01":"Ocak",
+    "02":"Şubat",
+    "03":"Mart",
+    "04":"Nisan",
+    "05":"Mayıs",
+    "06":"Haziran",
+    "07":"Temmuz",
+    "08":"Ağustos",
+    "09":"Eylül",
+    "10":"Ekim",
+    "11":"Kasım",
+    "12":"Aralık",
+}
+
+const TurkishClassics = [
+    "Aşk-ı Memnu",
+    "Bir Dönüm Toprak",
+    "Bir Çöküşün Öyküsü",
+    "Bir Gün",
+    "Cevdet Bey ve Oğulları",
+    "Sefiller",
+    "Kürk Mantolu Madonna",
+    "İntibah",
+    "Küçük Prens",
+    "Saat 6:15",
+    "Beyaz Geceler",
+    "Yalnızız",
+    "Savaş ve Barış",
+    "Gülün Adı",
+    "Alevli Günler",
+    "Neslihan",
+    "İzlanda Günlükleri",
+    "Vatan Yahut Silistre",
+    "İstanbul Hatırası",
+    "Eski İstanbul",
+    "Çalıkuşu",
+    "Kayıp Zamanın Peşinde",
+    "İnsan Ne İle Yaşar?",
+    "Edebiyat-ı Cedide",
+    "Felsefe Tarihi",
+    "Tüfek, Mikrop, Çelik",
+    "Bir Efsane",
+    "Sinekli Bakkal",
+    "Kurtlar Sofrası",
+    "Kuyucaklı Yusuf",
+    "Kırmızı ve Siyah",
+    "İçimizdeki Şeytan",
+    "Yüksek Topuklar",
+    "Sonsuzluğa Yolculuk",
+    "İki Şehrin Hikayesi",
+    "Bir Mucize",
+    "Serim ve Demir",
+    "Fakir Bir Kızın Hikayesi",
+    "Felsefe ve Edebiyat",
+    "Efsus",
+    "Aşk ve Gurur",
+    "Büyük Uyanış",
+    "Doğunun Sonu",
+    "Aziz İstanbul",
+    "Son Akşam Yemeği",
+    "Savaşın Kıyısında",
+    "Yaban",
+    "İkilik",
+    "Şeytanın Akılları",
+    "Beyhude",
+    "Denizler ve İnsanlar",
+    "Güzel Günler",
+    "Zoraki Koca",
+    "Sahipsiz Yürek",
+    "Yanlızlar Geceyi Sever",
+    "Aşk-ı Memnu (Yeniden)",
+    "Üç Arkadaş",
+    "Gözlerimi Kaparım, Vazifemi Yaparım",
+    "Mavi Gözlü Dev",
+    "Sessiz Ev",
+    "İstanbul’a Dönüş",
+    "Yalnızız",
+    "Benim Adım Kırmızı",
+    "Son Akşam Yemeği",
+    "Bir Efsane",
+    "Hayaline Firar Etmek",
+    "Kara Kitap",
+    "Bende Bir Kız Var",
+    "Türk Edebiyatı",
+    "İzmir’in İçinden",
+    "Çok İyi Bir Şey Oldu",
+    "Şu Günlerin İçindeyken",
+    "Bir Hiç Bir Zaman",
+    "Hayat Şarkısı",
+    "Gülün Adı",
+    "Gün Olur Alır Giderim",
+    "Kendi Göğüslerinde",
+    "Güneşin Feryadı",
+    "Mavi Kuğu",
+    "En Güzel İntikam",
+    "Benden Sonra",
+    "Kapalı Kapi",
+    "Sonsuz Sayılı Günler",
+    "Çehov’un Sözleri",
+    "İkilik",
+    "Bir Gecede İntihar",
+    "Yanlış Anlama",
+    "Kardeşimin Hikayesi",
+    "Kralın Çıkmazı",
+    "Ölülerin Günahı",
+    "Gümüş Yelkenler",
+    "Alışveriş Caddesi",
+    "Bütün Edebiyat",
+    "Dönüşüm",
+    "Sözlerin Ardında",
+    "Aşkın Dört Hali",
+    "Bütün Masallar",
+    "Havada Uçuşan Güvercinler",
+    "Dünya’nın En Güzel Kitapları",
+    "Zamanın Ötesinde",
+    "Canımın Arkadaşı",
+    "Rüzgarın Ardında",
+    "Kıskançlık",
+    "Başka Bir Yerde",
+    "Geceyi Beklerken",
+    "İçimin Sesi",
+    "Son Akşam Yemeği",
+    "Kuyrukluyıldız Altında Bir İzdivaç",
+    "Mürebbiye",
+    "Efsuncu Baba",
+    "İntibah",
+    "Şair Evlenmesi",
+    "Vatan Yahut Silistre",
+    "Küçük Şeyler",
+    "Felâtun Bey İle Râkım Efendi",
+    "Taaşşuk-ı Talat ve Fitnat",
+    "Mai ve Siyah",
+    "Refet",
+    "Turfanda mı Yoksa Turfa mı?",
+    "Ömer’in Çocukluğu",
+    "Dolaptan Temaşa",
+    "Gulyabani",
+    "Salon Köşelerinde",
+    "Falaka",
+    "A’mâk-ı Hayal – Hayalin Derinlikleri",
+    "Şeytankaya Tılsımı",
+    "Çingene",
+    "Sergüzeşt",
+    "Genç Kız Kalbi",
+    "Bize Göre ve Bir Seyahatin Notları",
+    "Seyahat Jurnali",
+    "Gönül Bir Yel Değirmenidir",
+    "Hazan Bülbülü",
+    "Aşk-ı Memnu",
+    "Kürk Mantolu Madonna",
+    "Levâyih-ı Hayat – Hayattan Sahneler",
+    "İçimizdeki Şeytan",
+    "Kuyucaklı Yusuf",
+    "Henüz 17 Yaşında",
+    "Değirmen",
+    "Sırça Köşk",
+    "Yeni Dünya",
+    "Kağnı",
+    "Eylül",
+    "Halas – Kurtuluş",
+    "Gurebahane-i Laklakan – Gariban Leylekler Evi",
+    "Küçük Paşa",
+    "Senin İçin (Toplu Hikâyeleri)",
+    "Siyah Gözler",
+    "Bahar ve Kelebekler",
+    "Ferdâ-yı Garâm – Aşkın Yarını",
+    "Menfi – Sürgün",
+    "Primo Türk Çocuğu",
+    "Karabibik",
+    "Şıpsevdi",
+    "Esrâr-ı Cinâyât",
+    "Ayyar Hamza – Kokona Yatıyor",
+    "Zavallı Necdet",
+    "Ah, Anne",
+    "Hakka Sığındık",
+    "Kuşdili’nde",
+    "Bir Aşkın Tarihi",
+    "Zavallı Çocuk",
+    "Ölmüş Bir Kadının Evrak-ı Metrukesi – Ölmüş Bir Kadının Günlüğü",
+    "Ölüm Allah’ın Emri",
+    "Zaniyeler",
+    "Define",
+    "Sefalet",
+    "Kan Damlası",
+    "Meyhanede Hanımlar",
+    "Bataklık Çiçeği",
+    "Müşahedat",
+    "Sefile",
+    "Çingeneler",
+    "Ay Demir",
+    "Kokotlar Mektebi",
+    "Geçmişten Gelen – Bütün Şiirleri-1",
+    "Kırık Hayatlar",
+    "Kızıl Serap",
+    "Dürdane Hanım",
+    "Cadı",
+    "Perili Bostan (Toplu Hikâyeleri 1)",
+    "Haziranın Yirminci Günü",
+    "Gecelerim",
+    "Ayten",
+    "Rübâb-ı Şikeste – Kırık Saz – Bütün Şiirleri-2",
+    "Aygır Fatma",
+    "Onikiler",
+    "Pervaneler",
+    "Harp Dönüşü",
+    "Akif Bey",
+    "Bütün Şiirleri",
+    "Cani Mi, Masum Mu?",
+    "Halûk’un Defteri – Şermîn, Son Şiirler – Bütün Şiirleri-3",
+    "Çulluk"
+  ];
+
+  const WorldLiteratureBooksTurkish = [
+   "Monte Kristo Kontu",
+        "Vadideki Zambak",
+        "Yüzbaşının Kızı",
+        "Zamanımızın Bir Kahramanı",
+        "Fareler ve İnsanlar",
+        "Drakula",
+        "Zaman Makinesi",
+        "Görünmez Adam",
+        "Anna Karenina",
+        "İnsan Ne ile Yaşar",
+        "Moby Dick",
+        "Çavdar Tarlasında Çocuklar",
+        "Genç Werther'in Acıları",
+        "Büyük Umutlar",
+        "Sineklerin Tanrısı",
+        "1984-Bin Dokuz Yüz Seksen Dört",
+        "Tess",
+        "Yüzyıllık Yalnızlık",
+        "Kırmızı Pazartesi",
+        "Dönüşüm",
+        "Satranç",
+        "Isabelle",
+        "Bir Delinin Hatıra Defteri",
+        "Pal Sokağı Çocukları",
+        "Gulliver'in Gezileri",
+        "Genç Bir Köy Hekimi",
+        "Küçük Prens",
+        "80 Günde Devri Alem",
+        "Dünya Merkezine Yolculuk",
+        "Denizler Altında Yirmi Bin Fersah",
+        "Fahrenheit 451",
+        "Cesur Yeni Dünya",
+        "Gora",
+        "Sherlock Holmes",
+        "Uğultulu Tepeler",
+        "Rüzgâr Gibi Geçti",
+        "Jane Eyre",
+        "Aşk ve Gurur",
+        "Silas Marner",
+        "Kuzey ve Güney",
+        "Bülbülü Öldürmek",
+        "Küçük Kadınlar",
+        "Madam Bovary",
+        "Sefiller",
+        "Martin Eden",
+        "Kadınlar Okulu",
+        "Vahşetin Çağrısı",
+        "Beyaz Diş",
+        "Kırmızı ve Siyah",
+        "Karamazov Kardeşler",
+        "Savaş ve Barış",
+        "Bulantı",
+        "Don Kişot",
+        "Üç Silahşorler",
+        "Notre Dame'ın Kamburu",
+        "Gurur Dünyası",
+        "Oblomov",
+        "Robinson Crusoe",
+        "Denemeler",
+        "Karanlığın Yüreği",
+        "İnce Memed",
+        "Babalar ve Oğullar",
+        "Tom Sawyer'ın Maceraları",
+        "Yaşlı Adam ve Deniz",
+        "Dorian Gray'in Portresi",
+        "Cesur Yeni Dünya",
+        "Saat 12'yi Gösteriyor",
+        "Savaş ve Barış",
+        "Sanatçının Genç Bir Adam Olarak Portresi",
+        "Batıda Cephesi Yok",
+        "Anna Karenina",
+        "Savaş Sonrası",
+        "Atlas Yeniden Sırtlandı",
+        "Sevilen",
+        "Cesur Yeni Dünya",
+        "Candide",
+        "Don Kişot",
+        "Drakula",
+        "Fahrenheit 451",
+        "Frankenstein",
+        "Rüzgar Gibi Geçti",
+        "Büyük Umutlar",
+        "Kafka",  // Not: Bu listeyi geliştirebilirsiniz, anlamlı 500 kitap listesi için.
+        "Sinekler ve Beyler",
+        "İki Şehrin Hikayesi",
+        "Moby Dick",
+        "Karamazov Kardeşler",
+        "Aşk ve Gurur",
+        "Sefiller",
+        "Bütün İnsanlar Eşittir",
+        "Küçük Prens",
+        "İzlanda Efsaneleri",
+        "Büyük Umutlar",
+        "Ekim Devrimi",
+        "Yüce Tanrı",
+        "Gizli Bahçe",
+        "Beyaz Zambaklar Ülkesinde",
+        "Veba",
+        "Savaş ve Barış",
+        "Karakter",
+        "Çekirge",
+        "Denizler Altında",
+        "Düşüş",
+        "Sarayda Çalgı",
+        "Sonsuzluk",
+        "Kuzey Rüzgarı",
+        "Küçük Kadınlar",
+        "Tanrı'nın Kendi Kötülüğü",
+        "Beyaz Gemi",
+        "Günümüz İnsanı",
+        "Köstebek",
+        "Germinal",
+        "Büyük Birader",
+        "Ne Zaman Ölürüz",
+        "Yalnızlar"
+  ];
+
+  const turkishAuthors = [
+    "Ahmet Hamdi Tanpınar",
+    "Ahmet Mithat Efendi",
+    "Ahmet Ümit",
+    "Alaeddin Özdemir",
+    "Alev Alatlı",
+    "Ali Baba ve Kırk Haramiler",
+    "Ali Erdal Yıldız",
+    "Ali Kemal",
+    "Alper Canıgüz",
+    "Arda Turan",
+    "Attila İlhan",
+    "Aydın Boysan",
+    "Aziz Nesin",
+    "Bahaeddin Özkişi",
+    "Baki",
+    "Behçet Necatigil",
+    "Bilge Karasu",
+    "Canan Tan",
+    "Cevat Şakir Kabaağaçlı (Halikarnas Balıkçısı)",
+    "Cihan Aktaş",
+    "Cumhuriyet Gazetesi",
+    "Deniz Zeyrek",
+    "Elif Şafak",
+    "Emine Işınsu",
+    "Emine Şenlikoğlu",
+    "Ferit Edgü",
+    "Fikret Otyam",
+    "Haldun Dormen",
+    "Halide Edib Adıvar",
+    "Halit Refig",
+    "Hikmet Temel Akarsu",
+    "Hüseyin Rahmi Gürpınar",
+    "İbrahim Balaban",
+    "İbrahim Zeki Burdurlu",
+    "İskender Pala",
+    "İsmail Hakkı Baltacıoğlu",
+    "Kahraman Tazeoğlu",
+    "Kemal Tahir",
+    "Köksal Yavuz",
+    "Mahir Ünsal Eriş",
+    "Mahmut Makal",
+    "Mehmet Akif Ersoy",
+    "Mehmet Eroğlu",
+    "Melih Cevdet Anday",
+    "Murat Menteş",
+    "Mustafa Kutlu",
+    "Mustafa Kemal Atatürk",
+    "Mustafa Şahin",
+    "Nedim Gürsel",
+    "Neriman Kızılkaya",
+    "Nezihe Meriç",
+    "Orhan Kemal",
+    "Orhan Pamuk",
+    "Oya Baydar",
+    "Ömer Seyfettin",
+    "Reşat Nuri Güntekin",
+    "Sabahattin Ali",
+    "Sadık Yalsızuçanlar",
+    "Sait Faik Abasıyanık",
+    "Samiha Ayverdi",
+    "Selim İleri",
+    "Sevgi Soysal",
+    "Süleyman Nazif",
+    "Tarık Buğra",
+    "Tezer Özlü",
+    "Yaşar Kemal",
+    "Yusuf Atılgan",
+    "Zafer Şenocak",
+    "Zeyyat Selimoğlu",
+    "Ziya Gökalp",
+    "Zülfü Livaneli",
+    "Ayla Kutlu",
+    "Atilla Tokatlı",
+    "Fuat Sevimay",
+    "Gülten Dayıoğlu",
+    "Haluk Oral",
+    "İhsan Sıtkı Yener",
+    "Mehmet Şevket Eygi",
+    "Nevzat Kösoğlu",
+    "Peyami Safa",
+    "Süreyya Berfe",
+    "Ahmet Kaya",
+    "Bülent Ecevit",
+    "Süleyman Çobanoğlu",
+    "Emine Yıldırım",
+    "Ferhan Şensoy",
+    "Hüseyin Nihal Atsız",
+    "Mustafa Kemal Paşa",
+    "Abdülhak Şinasi Hisar",
+    "İsmail Gaspıralı",
+    "Fatma Aliye",
+    "Mahmut Öztürk",
+    "Kemalettin Tuğcu",
+    "Refik Halit Karay",
+    "Hasan Ali Yücel",
+    "Hakkı Tarık Us",
+    "Recep Bilginer",
+    "Ali Osman Benli",
+    "Turan Gökçe",
+    "Tamer Gülbay",
+    "Taner Timur",
+    "Zeynep Tokuş"
+  ]
+  
+  const foreignAuthors  = [
+    "William Shakespeare", "Homer", "Leo Tolstoy", "Fyodor Dostoevsky", "Charles Dickens",
+    "Jane Austen", "Virginia Woolf", "Mark Twain", "Ernest Hemingway", "Gabriel García Márquez",
+    "Franz Kafka", "Herman Melville", "James Joyce", "George Orwell", "Oscar Wilde",
+    "Emily Dickinson", "Sylvia Plath", "J.R.R. Tolkien", "F. Scott Fitzgerald", "Dante Alighieri",
+    "H.G. Wells", "Jack London", "John Steinbeck", "William Faulkner", "Aldous Huxley",
+    "Ray Bradbury", "J.D. Salinger", "Maya Angelou", "Harper Lee", "Margaret Atwood",
+    "Thomas Hardy", "Kurt Vonnegut", "Tennessee Williams", "Vladimir Nabokov", "Ayn Rand",
+    "Samuel Beckett", "C.S. Lewis", "John Milton", "Gabriel García Márquez", "Albert Camus",
+    "Ralph Waldo Emerson", "Edgar Allan Poe", "Robert Frost", "Langston Hughes", "Charles Baudelaire",
+    "William Butler Yeats", "W.B. Yeats", "Soren Kierkegaard", "Dostoevsky", "John Updike",
+    "Jack Kerouac", "Anaïs Nin", "Philip K. Dick", "George Bernard Shaw", "Jorge Luis Borges",
+    "Isaac Asimov", "C.S. Lewis", "Harlan Ellison", "Boris Pasternak", "Aldous Huxley",
+    "Herman Hesse", "Arthur Conan Doyle", "Pablo Neruda", "Mikhail Bulgakov", "Karl Marx",
+    "Zadie Smith", "Toni Morrison", "Neil Gaiman", "Douglas Adams", "Haruki Murakami",
+    "Chimamanda Ngozi Adichie", "J.K. Rowling", "Ian McEwan", "John Green", "Stephen King",
+    "Kurt Vonnegut", "T.S. Eliot", "David Foster Wallace", "Kazuo Ishiguro", "Philip Roth",
+    "Don DeLillo", "Martin Amis", "Tom Wolfe", "Marguerite Yourcenar", "V.S. Naipaul",
+    "Michel Foucault", "Gustave Flaubert", "John Steinbeck", "Leonard Cohen", "Chuck Palahniuk",
+    "Erich Maria Remarque", "Virginia Woolf", "Geoffrey Chaucer", "John Locke", "Voltaire",
+    "Albert Einstein", "Sigmund Freud", "Jean-Paul Sartre", "Friedrich Nietzsche", "Emily Brontë",
+    "Charlotte Brontë", "Anne Brontë", "Emily Dickinson", "Louisa May Alcott", "Elizabeth Barrett Browning",
+    "Gertrude Stein", "William Wordsworth", "Rainer Maria Rilke", "William Blake", "Matthew Arnold",
+    "Percy Bysshe Shelley", "Lord Byron", "John Keats", "Gerard Manley Hopkins", "Dylan Thomas",
+    "Sylvia Plath", "Ted Hughes", "John Ashbery", "William Carlos Williams", "Frank O'Hara",
+    "E.E. Cummings", "Ralph Waldo Emerson", "Walt Whitman", "T.S. Eliot", "Langston Hughes",
+    "Rainer Maria Rilke", "Allen Ginsberg", "Jack London", "Emily Dickinson", "A.S. Byatt",
+    "Margaret Atwood", "Ian McEwan", "Zadie Smith", "Jonathan Franzen", "J.R.R. Tolkien",
+    "Douglas Adams", "Haruki Murakami", "Neil Gaiman", "Philip K. Dick", "Orson Scott Card",
+    "Margaret Weis", "Raymond E. Feist", "George R.R. Martin", "Terry Pratchett", "Ursula K. Le Guin",
+    "Isaac Asimov", "Arthur C. Clarke", "Philip K. Dick", "Anne Rice", "V.C. Andrews",
+    "Edgar Allan Poe", "Stephen King", "Ray Bradbury", "Dan Brown", "J.K. Rowling",
+    "George Orwell", "Aldous Huxley", "Margaret Atwood", "Franz Kafka", "H.G. Wells",
+    "Clive Barker", "Stephen King", "Dean Koontz", "Anne Rice", "E.L. James",
+    "Dan Brown", "John Grisham", "Mary Shelley", "Charles Dickens", "Victor Hugo",
+    "Herman Melville", "Leo Tolstoy", "Fyodor Dostoevsky", "Gabriel García Márquez", "Jane Austen",
+    "Arthur Conan Doyle", "Emily Brontë", "Charlotte Brontë", "William Shakespeare", "J.R.R. Tolkien",
+    "George Bernard Shaw", "Tennessee Williams", "John Steinbeck", "Edgar Allan Poe", "Oscar Wilde",
+    "F. Scott Fitzgerald", "Mark Twain", "Charles Dickens", "Hermann Hesse", "Oscar Wilde",
+    "Agatha Christie", "Arthur Conan Doyle", "Raymond Chandler", "Dashiell Hammett", "Elmore Leonard",
+    "William S. Burroughs", "Philip K. Dick", "Robert Heinlein", "L. Ron Hubbard", "Ursula K. Le Guin",
+    "George Orwell", "Aldous Huxley", "Arthur C. Clarke", "Isaac Asimov", "Ray Bradbury",
+    "Frank Herbert", "Robert Silverberg", "Gene Wolfe", "Octavia Butler", "Margaret Atwood",
+    "Kim Stanley Robinson", "Philip K. Dick", "H.G. Wells", "Stanislaw Lem", "Raymond E. Feist"
+  ]
+
+const literaryTermsAndGenres  = [
+    "Allegori", // Alegori
+    "Analepsis (Geriye Dönük Anlatım)",
+    "Antagonist",
+    "Atmosfer",
+    "Aforizma",
+    "Arka Plan",
+    "Başlangıç (İntro)",
+    "Biyografi",
+    "Çizim (Karakter Çizimi)",
+    "Cliffhanger",
+    "Diyalog",
+    "Edebiyat",
+    "Edebiyat Eleştirisi",
+    "Edebiyat Tarihi",
+    "Edebi Akım",
+    "Edebi Tür",
+    "Epifani",
+    "Eşleşme (Metafor)",
+    "Fabl",
+    "Felsefi Edebiyat",
+    "Geriye Dönük Anlatım",
+    "Gizli Anlam",
+    "Görsel Edebiyat",
+    "Güldürü",
+    "Hikaye",
+    "İroni",
+    "Karakter",
+    "Klasik",
+    "Klasik Edebiyat",
+    "Kitap",
+    "Kitabı",
+    "Konu",
+    "Kurgu",
+    "Monolog",
+    "Motif",
+    "Olay Örgüsü",
+    "Olayın Tersine Dönüşü",
+    "Olay Zamanı",
+    "Pandomim",
+    "Parodi",
+    "Peripeteia",
+    "Poetik",
+    "Polifonik",
+    "Prolog",
+    "Psikolojik Edebiyat",
+    "Realizm",
+    "Retorik",
+    "Romantizm",
+    "Sembolizm",
+    "Şiirsel Dil",
+    "Sosyal Edebiyat",
+    "Stil",
+    "Strüktürel Edebiyat",
+    "Süregelik Edebiyat",
+    "Tinsel Edebiyat",
+    "Toplumsal Gerçekçilik",
+    "Tragedya",
+    "Türk Edebiyatı",
+    "İngiliz Edebiyatı",
+    "Rus Edebiyatı",
+    "Fransız Edebiyatı",
+    "Alman Edebiyatı",
+    "Ursus Edebiyatı",
+    "Varlık Edebiyatı",
+    "Vizyoner Edebiyat",
+    "Yalnızlık Edebiyatı",
+    "Yerli Edebiyat",
+    "Zaman Yolculuğu Edebiyatı",
+
+    // Edebiyat Türleri
+    "Felsefi Edebiyat",
+    "Gotik Edebiyat",
+    "Hikaye",
+    "İroni",
+    "Klasik Edebiyat",
+    "Komedi",
+    "Lirizm",
+    "Mizah",
+    "Modernizm",
+    "Romantizm",
+    "Realizm",
+    "Sürükleyici Edebiyat",
+    "Şiir",
+    "Toplumsal Edebiyat",
+    "Tragedya",
+    "Utopik Edebiyat",
+    "Kısa Hikaye",
+    "Efsanevi Edebiyat",
+    "Çocuk Edebiyatı",
+    "Bilim Kurgu",
+    "Fantastik Edebiyat",
+    "Biyografik Edebiyat",
+    "Deneme",
+    "Mektup Edebiyatı",
+    "Edebiyat Eleştirisi",
+    "Dünya Edebiyatı"
+]
+
+const keywords = WorldLiteratureBooksTurkish.concat(TurkishClassics, foreignAuthors, literaryTermsAndGenres,turkishAuthors)
+
+
+export default class SummaryPage extends Component {
+
+  
+    constructor(props) {
+        super(props);
+        // state'in başlangıç değerini burada ayarlayabilirsiniz
+        this.state = {
+            events: [], // events başlangıçta boş
+            births: [], // births başlangıçta boş
+            deaths: [], // deaths başlangıçta boş
+            month : "01",
+            day: "01",
+            Months : Months
+          };
+    
+        // Fonksiyonun bağlanması
+        this.fetchEvents = this.fetchEvents.bind(this);
+      }
+
+    fetchEvents = async () => {
+            const currentDate = new Date();
+
+            var dayOfMonth = currentDate.getDate();
+
+            if (dayOfMonth < 10)
+            {
+                dayOfMonth = "0" + dayOfMonth;
+            }
+
+            this.state.day = dayOfMonth;
+
+            var monthOfYear = currentDate.getMonth() + 1;
+            if (monthOfYear < 10)
+            {
+                monthOfYear = "0" + monthOfYear;
+            }
+            this.state.month = monthOfYear;
+
+          const response = await axios.get(
+            "https://tr.wikipedia.org/api/rest_v1/feed/onthisday/all/" + monthOfYear + "/"+ dayOfMonth+ "/"
+          )
+          .then((response) => {
+            const data = response.data;
+            console.log(data);
+            // Gelen veriyi işleyerek state'e kaydediyoruz
+            const formattedData = {
+              events: data.events
+              .filter((event) => keywords.some((keyword) => event.text.includes(keyword))) // keywords'deki herhangi bir kelimeyi içerip içermediğini kontrol ediyoruz
+              .map((event) => ({
+                text: event.text,
+                year: event.year,
+                pages: event.pages.map((page) => ({
+                  title: page.title,
+                })),
+              })),
+              births: data.births
+              .filter((birth) => keywords.some((keyword) => birth.text.includes(keyword))) // Aynı şekilde filter ve map işlemi
+              .map((birth) => ({
+                text: birth.text,
+                year: birth.year,
+                pages: birth.pages.map((page) => ({
+                  title: page.title,
+                })),
+              })),
+              deaths: data.deaths
+              .filter((death) => keywords.some((keyword) => death.text.includes(keyword))) // Aynı şekilde filter ve map işlemi
+              .map((death) => ({
+                text: death.text,
+                year: death.year,
+                pages: death.pages.map((page) => ({
+                  title: page.title,
+                })),
+              })),
+            };
+    
+
+            this.setState(formattedData); // State'i güncelliyoruz
+        });
+    }
+
+    componentDidMount()
+    {
+      this.fetchEvents();
+    }
+
+    render() {
+
+        return (
+            <div>
+                 <h2 className="header-title center-align mb-4 mb-4">{this.state.day}-{this.state.Months[this.state.month]} Tarihinde Edebiyatta Yaşanan Olaylar...</h2>
+                <hr></hr>
+  
+                <p className="center-align mb-4 mb-4" style={{color:"orange"}} >Bilgiler Vikipedi'den Alınmaktadır.</p>
+               
+                    {this.state.events.map((event, index) => (
+                        <div className='row' style={{textAlign:"center"}}>
+
+                            <CardGroup className="centered-container">
+                                <Col className='card-col'>
+                                    <Card key={index} className='summary-card me-1 ms-1' style={{ border: '2px solid white' }}>
+                                        <CardText>
+                                        {event.text}
+                                        </CardText>
+                                        <CardFooter>
+                                            Yıl:{event.year}
+                                        </CardFooter>
+                                    </Card>
+                                </Col>
+                            </CardGroup>                           
+                     </div>
+                    ))}
+            
+                  {this.state.births.map((event, index) => (
+                        <div className='row' style={{textAlign:"center"}}>
+
+                            <CardGroup className="centered-container">
+                                <Col className='card-col'>
+                                    <Card key={index} className='summary-card me-1 ms-1' style={{ border: '2px solid white' }}>
+                                        <CardText>
+                                        {event.text} "-" {event.year} tarihinde doğdu.
+                                        </CardText>
+                                        <CardFooter>
+                                            Yıl:{event.year}
+                                        </CardFooter>
+                                    </Card>
+                                </Col>
+                            </CardGroup>                           
+                     </div>
+                    ))}
+
+        
+                    {this.state.deaths.map((event, index) => (
+                        <div className='row' style={{textAlign:"center"}}>
+
+                            <CardGroup className="centered-container">
+                                <Col className='card-col'>
+                                    <Card key={index} className='summary-card me-1 ms-1' style={{ border: '2px solid white' }}>
+                                        <CardText>
+                                        {event.text} "-" {event.year} tarihinde vefat etti.
+                                        </CardText>
+                                        <CardFooter>
+                                            Yıl:{event.year}
+                                        </CardFooter>
+                                    </Card>
+                                </Col>
+                            </CardGroup>                           
+                     </div>
+                    ))}
+
+            </div>
+        )
+    }
+}

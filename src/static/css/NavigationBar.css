@@ -1,0 +1,28 @@
+.brand-link
+{
+    color:red;
+}
+
+.brand-link:hover
+{
+    color:white;
+}
+
+.link{
+    color: white;
+    text-decoration: none;
+}
+
+.link:hover{
+    color: red;
+}
+
+.search-bar{
+    background-color: black;
+    color: white;
+    float: "right";
+}
+
+.search-bar::placeholder{
+    color: white;
+}
