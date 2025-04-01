@@ -565,7 +565,7 @@ export default class SummaryPage extends Component {
                 <hr></hr>
   
                 <p className="center-align mb-4 mb-4" style={{color:"orange"}} >Bilgiler Vikipedi'den Alınmaktadır.</p>
-                <p className="center-align mb-4 mb-4" style={{color:"orange"}} >Android APK'sını İndirmek için <a href="/edebitarih.apk" download>tıklayınız.</a></p>
+                <p className="center-align mb-4 mb-4" style={{color:"orange"}} >Android APK'sını İndirmek için <a href={window.location.origin + "/edebitarih.apk"} download>tıklayınız.</a></p>
 
                     {this.state.events.map((event, index) => (
                         <div className='row' style={{textAlign:"center"}}>
