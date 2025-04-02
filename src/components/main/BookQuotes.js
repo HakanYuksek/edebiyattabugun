@@ -330,7 +330,7 @@ export default function AlintilarApp() {
 
   return (
    <div className="d-flex flex-column align-items-center min-vh-100 p-4">
-        <Form className="d-flex align-items-center gap-2 shadow-sm rounded-2xl p-2 w-50 max-w-md" onSubmit={handleFormSubmit}>
+        <Form className="d-flex flex-column flex-md-row align-items-center gap-2 shadow-sm rounded-2xl p-2 w-50 max-w-md" onSubmit={handleFormSubmit}>
         <FormGroup className="flex-grow-1 mb-0">
           <Input
             type="text"
