@@ -19,6 +19,12 @@ class NavigationBar extends Component {
                             <Link className='link' to="/kelime-ara">Kelime Ara</Link>
                         </NavLink>
                     </NavItem>
+
+                    <NavItem>
+                        <NavLink>
+                            <Link className='link' to="/alintilar">Alıntılar</Link>
+                        </NavLink>
+                    </NavItem>
                 </Nav>
             </Navbar>
         )

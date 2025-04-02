@@ -2,6 +2,7 @@ import { Container } from "reactstrap";
 import NavigationBar from "./NavigationBar";
 import SummaryPage from "./main/SummaryPage";
 import SearchBar from "./main/SearchBar";
+import BookQuotes from "./main/BookQuotes";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Route exact path="/" element={<SummaryPage />}></Route>
           <Route exact path="/kelime-ara" element={<SearchBar />}></Route>
           <Route exact path="/edebiyattabugun" element={<SummaryPage />}></Route>
+          <Route exact path="/alintilar" element={<BookQuotes />}></Route>
         </Routes>
 
       </Container>

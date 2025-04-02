@@ -57,9 +57,8 @@ export default function DictionarySearch() {
 
       {loading && <p className="mt-4 text-secondary">Aranıyor...</p>}
      
-     
-      {/* Arama sonuçları */}
-      <Row className="mt-4 w-100 justify-content-center">
+          {/* Arama sonuçları */}
+          <Row className="mt-4 w-100 justify-content-center">
         {results.length > 0 &&
           results.map((item, index) => (
             <Col key={index} xs="12" sm="12" md="10" lg="8" className="mb-4">
@@ -68,15 +67,19 @@ export default function DictionarySearch() {
                   <CardTitle tag="h5" className="text-dark font-weight-bold">
                     {item.madde}
                   </CardTitle>
-                  <CardText className="text-muted">
-                    {item.anlamlarListe[0]?.anlam}
-                  </CardText>
-                  {/* Example sentence if available */}
-                  {item.orneklerListe && item.orneklerListe.length > 0 && (
-                    <CardText className="text-dark">
-                      <strong>Örnek Cümle:</strong> {item.orneklerListe[0]?.ornek}
-                    </CardText>
-                  )}
+                  <hr/>
+
+                  {item.anlamlarListe.map((anlam, idx) => (
+                    <div key={idx}>
+                      <CardText className="text-muted"><strong>Anlam-{idx + 1}:</strong> {anlam.anlam}</CardText>
+                       {anlam.orneklerListe && anlam.orneklerListe.length > 0 && (
+                        <CardText className="text-dark">
+                          <strong>Örnek Cümle:</strong> {anlam.orneklerListe[0]?.ornek}
+                        </CardText>
+                      )}
+                      <hr/>
+                    </div>
+                  ))}
                 </CardBody>
               </Card>
             </Col>
