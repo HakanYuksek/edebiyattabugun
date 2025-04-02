@@ -1,7 +1,8 @@
 .header-title {
     background-color: #211F1F;
     color: white;
-    font-size: xx-large;
+    font-size: 35px;
+    background-image: url('../img/book5.png');
 }
 
 .center-align {

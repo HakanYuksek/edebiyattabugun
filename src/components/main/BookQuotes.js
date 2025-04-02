@@ -295,14 +295,23 @@ export default function AlintilarApp() {
     { kitapAdi: "Kırmızı Pazartesi", alinti: "Gerçek suçluyu anlamak, geriye kalan izleri çözmekle mümkündür." }
     // Daha fazla alıntı ekleyebilirsiniz
   ]);
-  const [filteredAlintilar, setFilteredAlintilar] = useState(alintilar);
 
+  const uniqueAlintilar = Array.from(
+    new Set(alintilar.map(item => item.alinti))
+  ).map(alinti => {
+    return alintilar.find(item => item.alinti === alinti);
+  });
+
+  const [filteredAlintilar, setFilteredAlintilar] = useState(uniqueAlintilar);
   
   const handleSearch = () => {
-    const filtered = alintilar.filter(item =>
+    const filtered = uniqueAlintilar.filter(item =>
       item.alinti.toLowerCase().includes(query.toLowerCase()) ||
       item.kitapAdi.toLowerCase().includes(query.toLowerCase())
     );
+
+
+    
     setFilteredAlintilar(filtered);
   };
 

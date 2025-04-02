@@ -561,12 +561,10 @@ export default class SummaryPage extends Component {
 
         return (
             <div>
-                 <h2 className="header-title center-align mb-4 mb-4">{this.state.day}-{this.state.Months[this.state.month]} Tarihinde Edebiyatta Yaşanan Olaylar...</h2>
+                 <h1 className="header-title center-align mb-4 mb-4">{this.state.day}-{this.state.Months[this.state.month]} Tarihinde Edebiyatta Yaşanan Olaylar...</h1>
                 <hr></hr>
   
-                <p className="center-align mb-4 mb-4" style={{color:"orange"}} >Bilgiler Vikipedi'den Alınmaktadır.</p>
-                <p className="center-align mb-4 mb-4" style={{color:"orange"}} >Android APK'sını İndirmek için <a href={process.env.PUBLIC_URL+ "/edebitarih.apk"} download>tıklayınız.</a></p>
-
+                <p className="center-align mb-4 mb-4" style={{color:"white", fontSize:"20px"}}>Bilgiler Vikipedi'den Alınmaktadır.</p>
                     {this.state.events.map((event, index) => (
                         <div className='row' style={{textAlign:"center"}}>
 

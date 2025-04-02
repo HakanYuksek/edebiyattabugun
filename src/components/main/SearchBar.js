@@ -53,7 +53,7 @@ export default function DictionarySearch() {
                 </FormGroup>
       </Form>
 
-      <p className="center-align mb-4 mb-4" style={{color:"orange"}} >Sonuçlar TDK'dan Alınmaktadır.</p>
+      <p className="center-align mb-4 mb-4" style={{color:"white", fontSize:"20px"}} >Sonuçlar TDK'dan Alınmaktadır.</p>
 
       {loading && <p className="mt-4 text-secondary">Aranıyor...</p>}
      

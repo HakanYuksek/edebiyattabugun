@@ -6,6 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #211F1F;
+  background-image: url('./static/img/book5.png');
 }
 
 code {
