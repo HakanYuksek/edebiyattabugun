@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input, Button, Form, FormGroup,Row, Col, Card, CardBody, CardTitle, CardText, } from "reactstrap";
+import { Input, Button, Form, FormGroup,Row, Col, Card, CardBody, CardTitle, CardText, CardFooter, CardHeader, } from "reactstrap";
 
 export default function DictionarySearch() {
   const [query, setQuery] = useState("");
@@ -63,6 +63,11 @@ export default function DictionarySearch() {
           results.map((item, index) => (
             <Col key={index} xs="12" sm="12" md="10" lg="8" className="mb-4">
               <Card className="shadow-sm p-3 rounded-lg">
+                <CardHeader>
+                <CardTitle tag="h4" className="text-dark font-weight-bold">
+                    TDK Sözlükteki Anlamları
+                  </CardTitle>
+                </CardHeader>
                 <CardBody>
                   <CardTitle tag="h5" className="text-dark font-weight-bold">
                     {item.madde}
@@ -81,6 +86,17 @@ export default function DictionarySearch() {
                     </div>
                   ))}
                 </CardBody>
+                
+                <CardFooter>
+                    <ul>
+                      <li>
+                        Etimoloji Sözlükteki Anlamını Görmek için <a style={{color:"#6c757d"}} target="_blank" href = {"https://www.etimolojiturkce.com/arama/" + item.madde}>Tıklayınız.</a>
+                      </li>
+                      <li>
+                        Lügatım Sözlükteki Anlamını Görmek için <a style={{color:"#6c757d"}} target="_blank" href = {"https://www.lugatim.com/s/" + item.madde}>Tıklayınız.</a>
+                      </li>
+                    </ul>
+                </CardFooter>
               </Card>
             </Col>
           ))}

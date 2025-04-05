@@ -590,7 +590,7 @@ export default class SummaryPage extends Component {
                                 <Col className='card-col'>
                                     <Card key={index} className='summary-card me-1 ms-1' style={{ border: '2px solid white' }}>
                                         <CardText>
-                                        {event.text} "-" {event.year} tarihinde doğdu.
+                                        {event.text} - {event.year} tarihinde doğdu.
                                         </CardText>
                                         <CardFooter>
                                             Yıl:{event.year}
@@ -609,7 +609,7 @@ export default class SummaryPage extends Component {
                                 <Col className='card-col'>
                                     <Card key={index} className='summary-card me-1 ms-1' style={{ border: '2px solid white' }}>
                                         <CardText>
-                                        {event.text} "-" {event.year} tarihinde vefat etti.
+                                        {event.text} - {event.year} tarihinde vefat etti.
                                         </CardText>
                                         <CardFooter>
                                             Yıl:{event.year}
