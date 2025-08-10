@@ -358,7 +358,7 @@ export default function AlintilarApp() {
                       <Card key={index} className='summary-card me-1 ms-1' style={{ border: '2px solid white'}}>
                 
                       <CardText className="text-white" style={{ fontStyle: 'italic' }}>
-                          "{item.alinti}""
+                          "{item.alinti}"
                       </CardText>
 
                       <CardFooter className="text-white font-weight-bold text-right mt-0" style={{textAlign:"right", fontStyle: 'italic'}}>

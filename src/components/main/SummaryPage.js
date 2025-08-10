@@ -477,13 +477,18 @@ export default class SummaryPage extends Component {
   
     constructor(props) {
         super(props);
+
+        const today = new Date();
+        const month = String(today.getMonth() + 1).padStart(2, "0");
+        const day = String(today.getDate()).padStart(2, "0");
+
         // state'in başlangıç değerini burada ayarlayabilirsiniz
         this.state = {
             events: [], // events başlangıçta boş
             births: [], // births başlangıçta boş
             deaths: [], // deaths başlangıçta boş
-            month : "01",
-            day: "01",
+            month: month,
+            day: day,
             Months : Months
           };
     
