@@ -32,6 +32,18 @@ class NavigationBar extends Component {
                             <Link className='link' to="/ozetler">Kısa Özetler</Link>
                         </NavLink>
                     </NavItem>
+
+                    <NavItem>
+                        <NavLink>
+                            <Link className='link' to="/oneri">Ne Okusam</Link>
+                        </NavLink>
+                    </NavItem>
+
+                     <NavItem>
+                        <NavLink>
+                            <Link className='link' to="/hakkinda">Hakkında</Link>
+                        </NavLink>
+                    </NavItem>
                 </Nav>
             </Navbar>
         )

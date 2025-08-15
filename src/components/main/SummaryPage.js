@@ -489,7 +489,8 @@ export default class SummaryPage extends Component {
             deaths: [], // deaths başlangıçta boş
             month: month,
             day: day,
-            Months : Months
+            Months : Months,
+            loading: true
           };
     
         // Fonksiyonun bağlanması
@@ -514,6 +515,8 @@ export default class SummaryPage extends Component {
                 monthOfYear = "0" + monthOfYear;
             }
             this.state.month = monthOfYear;
+
+            this.state.loading = true;
 
           const response = await axios.get(
             "https://tr.wikipedia.org/api/rest_v1/feed/onthisday/all/" + monthOfYear + "/"+ dayOfMonth+ "/"
@@ -552,8 +555,8 @@ export default class SummaryPage extends Component {
               })),
             };
     
-
-            this.setState(formattedData); // State'i güncelliyoruz
+            this.state.loading = false;
+            this.setState(formattedData); 
         });
     }
 
@@ -570,6 +573,12 @@ export default class SummaryPage extends Component {
                 <hr></hr>
   
                 <p className="center-align mb-4 mb-4" style={{color:"white", fontSize:"20px"}}>Bilgiler Vikipedi'den Alınmaktadır.</p>
+                     {this.state.loading ? (
+                        <p className='spinner' style={{color:"yellow", fontSize:"18px", textAlign:"center"}}>📚</p>
+                      )
+                        : <br/>
+                      }
+
                     {this.state.events.map((event, index) => (
                         <div className='row' style={{textAlign:"center"}}>
 
