@@ -22,8 +22,8 @@ export default function DictionarySearch() {
   const handleKeyDown = (event) => {
 
     if (event.key === "enter") {
-        event.preventDefault();  // Enter tuşu ile sayfa yenilemesini engelle
-      searchWord(); // Enter tuşuna basıldığında arama yap
+        event.preventDefault();  
+      searchWord(); 
     }
   };
 
@@ -57,7 +57,6 @@ export default function DictionarySearch() {
 
       {loading && <p className="mt-4 text-secondary">Aranıyor...</p>}
      
-          {/* Arama sonuçları */}
           <Row className="mt-4 w-100 justify-content-center">
         {results.length > 0 &&
           results.map((item, index) => (

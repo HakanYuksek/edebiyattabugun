@@ -482,11 +482,10 @@ export default class SummaryPage extends Component {
         const month = String(today.getMonth() + 1).padStart(2, "0");
         const day = String(today.getDate()).padStart(2, "0");
 
-        // state'in başlangıç değerini burada ayarlayabilirsiniz
         this.state = {
-            events: [], // events başlangıçta boş
-            births: [], // births başlangıçta boş
-            deaths: [], // deaths başlangıçta boş
+            events: [],
+            births: [],
+            deaths: [],
             month: month,
             day: day,
             Months : Months,
@@ -524,10 +523,10 @@ export default class SummaryPage extends Component {
           .then((response) => {
             const data = response.data;
             console.log(data);
-            // Gelen veriyi işleyerek state'e kaydediyoruz
+
             const formattedData = {
               events: data.events
-              .filter((event) => keywords.some((keyword) => event.text.includes(keyword))) // keywords'deki herhangi bir kelimeyi içerip içermediğini kontrol ediyoruz
+              .filter((event) => keywords.some((keyword) => event.text.includes(keyword))) 
               .map((event) => ({
                 text: event.text,
                 year: event.year,
@@ -536,7 +535,7 @@ export default class SummaryPage extends Component {
                 })),
               })),
               births: data.births
-              .filter((birth) => keywords.some((keyword) => birth.text.includes(keyword))) // Aynı şekilde filter ve map işlemi
+              .filter((birth) => keywords.some((keyword) => birth.text.includes(keyword)))
               .map((birth) => ({
                 text: birth.text,
                 year: birth.year,
@@ -545,7 +544,7 @@ export default class SummaryPage extends Component {
                 })),
               })),
               deaths: data.deaths
-              .filter((death) => keywords.some((keyword) => death.text.includes(keyword))) // Aynı şekilde filter ve map işlemi
+              .filter((death) => keywords.some((keyword) => death.text.includes(keyword)))
               .map((death) => ({
                 text: death.text,
                 year: death.year,

@@ -8,10 +8,10 @@ export default function About() {
         className='me-1 ms-1' 
         style={{ 
           border: '4px solid white', 
-          width: '90%',         // küçük ekranlarda %90 genişlik
-          maxWidth: '800px',    // büyük ekranlarda maksimum 800px
-          boxShadow: '0 4px 15px rgba(0,0,0,0.3)', // daha dikkat çekici
-          borderRadius: '12px'  // hafif yuvarlatılmış köşeler
+          width: '90%',        
+          maxWidth: '800px',    
+          boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
+          borderRadius: '12px'
         }}
       >
         <CardHeader 
