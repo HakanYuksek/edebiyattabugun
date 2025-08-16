@@ -13,13 +13,7 @@ class NavigationBar extends Component {
                     <NavbarBrand className='brand-link' href="/edebiyattabugun">
                         Edebiyatta Bugün
                     </NavbarBrand>
-
-                    <NavItem>
-                        <NavLink>
-                            <Link className='link' to="/kelime-ara">Kelime Ara</Link>
-                        </NavLink>
-                    </NavItem>
-
+                    
                     <NavItem>
                         <NavLink>
                             <Link className='link' to="/alintilar">Alıntılar</Link>
