@@ -6,6 +6,7 @@ import BookSummary from "./main/BookSummary";
 import { Route, Routes } from "react-router-dom";
 import BookRecommendation from "./main/BookRecommendation";
 import About from "./main/About";
+import BuyWhereApp from "./main/BuyWhere";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route exact path="/alintilar" element={<BookQuotes />}></Route>
           <Route exact path="/ozetler" element={<BookSummary />}></Route>
           <Route exact path="/oneri" element={<BookRecommendation />}></Route>
+          <Route exact path="/nereden-alsam" element={<BuyWhereApp />}></Route>
           <Route exact path="/hakkinda" element={<About />}></Route>
         </Routes>
 
