@@ -283,7 +283,7 @@ export default function BookRecommendation() {
 {
     name: "Eylül",
     summary: "Aşkın karmaşası ve bireysel arzuların çatışması üzerine roman.",
-    details: "Halit Ziya Uşaklıgil’in romanı, karakterlerin aşkı, özlemi ve beklentilerini detaylı bir şekilde işler. Sevgi, fedakârlık, arzular ve reddedilme temaları ön plandadır."
+    details: "Mehmet Rauf'un romanı, karakterlerin aşkı, özlemi ve beklentilerini detaylı bir şekilde işler. Sevgi, fedakârlık, arzular ve reddedilme temaları ön plandadır."
 },
 {
     name: "Suç ve Ceza",
